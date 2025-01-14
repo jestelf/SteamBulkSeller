@@ -47,6 +47,7 @@ if (
   var maxPriceToSell = 0;       // максимальная цена (в копейках/центах). 0 — нет максимума
   var markupPercent = 0;        // надбавка к вычисленной цене (в %)
   var skipFoil = false;         // пропускать ли фольгированные карточки
+  var analysisDays = 10;        // количество дней для анализа (по умолчанию 10)
   
   /***************************************************
    *     СОХРАНЯЕМ ССЫЛКИ НА ОРИГИНАЛЬНЫЕ ФУНКЦИИ
@@ -98,6 +99,10 @@ if (
   
         <label style="font-size:12px;" for="markupInput">Надбавка (%) к цене:</label>
         <input type="number" id="markupInput" value="0" style="width:70px;"><br>
+        
+        <!-- Новое поле для ввода количества дней для анализа -->
+        <label style="font-size:12px;" for="analysisDaysInput">Дней для анализа:</label>
+        <input type="number" id="analysisDaysInput" value="10" style="width:70px;"><br>
   
         <label style="font-size:12px;">
           <input type="checkbox" id="skipFoilCheck"> Пропускать фольгу
@@ -277,13 +282,13 @@ if (
   }
   
   function patched_OnPriceHistorySuccess(transport) {
-    // Автоматически вычисляем медианную цену за последние 10 дней
+    // Автоматически вычисляем медианную цену за последние analysisDays дней
     var cardsPerPrice = [];
     var totalCardsSold = 0;
     for (var i = 0; i < transport.responseJSON.prices.length; i++) {
       var dataPoint = transport.responseJSON.prices[i];
-      // Игнорируем, если данные старше 10 дней
-      if (Date.now() - dateStringToTicks(dataPoint[0]) > 1000 * 60 * 60 * 24 * 10) {
+      // Игнорируем, если данные старше analysisDays дней
+      if (Date.now() - dateStringToTicks(dataPoint[0]) > 1000 * 60 * 60 * 24 * analysisDays) {
         continue;
       }
       var medianPrice = dataPoint[1];
@@ -514,6 +519,7 @@ if (
     maxPriceToSell = parseInt(document.getElementById("maxPriceInput").value) || 0;
     markupPercent = parseInt(document.getElementById("markupInput").value) || 0;
     skipFoil = document.getElementById("skipFoilCheck").checked;
+    analysisDays = parseInt(document.getElementById("analysisDaysInput").value) || 10; // Получаем количество дней для анализа
   
     // Сбрасываем счётчики
     profit_total_nofee = 0;
@@ -532,4 +538,3 @@ if (
     autoSellActive = false;
     // На следующем шаге продажа завершается (finishSelling())
   }
-  
