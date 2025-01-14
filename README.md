@@ -1,36 +1,48 @@
-# Steam Bulk Seller
+# Steam Bulk Seller (Русифицированная версия)
 
-If you're like me, you don't care much about custom emoji or whatever collecting Steam Trading Cards get you. Instead, you can sell each of the cards for about 10¢ each. If you've got an inventory with hundreds of cards, this can make you enough money (in Steam store credit) to buy a few cheap games.
+Если вы, как и я, не особо увлекаетесь коллекционированием Steam Trading Cards (например, ради кастомных эмодзи), то можете просто продать свои карточки. Каждая из них стоит около 10 центов. Если в вашем инвентаре есть сотни карточек, это может принести вам достаточно средств (в виде кредитов Steam), чтобы купить пару недорогих игр.
 
-This small JavaScript snippet automatically sells all of the Steam trading cards in your inventory. It sells them for the median price of the past ten days' sales.
+Этот небольшой JavaScript-скрипт автоматически продаёт все карточки Steam из вашего инвентаря. В оригинальной версии скрипт выставляет карточки на продажу по медианной цене за последние 10 дней.
 
-This script works well with [IdleMaster](http://steamidlemaster.com/) ([non-Windows version](https://github.com/jshackles/idle_master_py)), a program you can leave running to get all possible Steam trading cards from your games.
+Эта модифицированная и русифицированная версия позволяет:
+- Работать с русским интерфейсом Steam.
+- Использовать актуальные цены за последние 24 часа вместо медианы за 10 дней.
+- Управлять процессом продажи через удобный интерфейс (UI), добавленный в правом нижнем углу страницы.
+- Настраивать задержку между продажами.
+- Запускать и останавливать процесс продажи в любой момент.
 
-## How to use
+## Как пользоваться
 
-- Log into Steam on [the Steam website](https://steamcommunity.com/login):
+1. Войдите в свой аккаунт на [сайте Steam](https://steamcommunity.com/login):
 
-![Steam website login](./steam_signin.jpg)
+![Вход на сайт Steam](./steam_signin.jpg)
 
-- Go to your inventory:
+2. Перейдите в свой инвентарь:
 
-![Inventory on Steam dropdown](./inventory_dropdown.jpg)
+![Инвентарь в меню Steam](./inventory_dropdown.jpg)
 
-From here you can either create a bookmarklet or manually input the file contents.
+3. На странице инвентаря вставьте скрипт в консоль браузера.
 
-### Bookmarklet (easiest option)
-- Go to [this page](https://milkey-mouse.github.io/SteamBulkSeller/) to "install" the bookmarklet.
-- Go back to the Steam page and click on the new bookmark.
-- Wait while it sells all the cards. It should only take 60 seconds or so.
+### Вставка скрипта в консоль
+- Откройте консоль разработчика: нажмите `Ctrl-Shift-I` (или `Cmd-Alt-I` на Mac), а затем перейдите на вкладку «Консоль». Это работает в большинстве браузеров. Пример для Chrome:
 
-![GIF of bookmarklet installation](./drag-bookmarklet.gif)
+![Открытие консоли в Chrome](./chrome_dev_console.jpg)
 
-### Manual input
-- On the Steam inventory page, press `Ctrl-Shift-I` or `Cmd-Alt-I` to open the dev console. This works on all major browsers, but the screenshot is of Chrome:
+- Вставьте содержимое модифицированного скрипта в консоль и нажмите Enter.
+- На странице появится небольшой интерфейс в правом нижнем углу. Используйте кнопки «Старт» и «Стоп», чтобы управлять процессом продажи.
 
-![Open the Chrome dev console](./chrome_dev_console.jpg)
+### Основной функционал
+- Скрипт фильтрует только продаваемые предметы (например, карточки).
+- Продаёт предметы по средней цене за последние 24 часа (с учётом русского интерфейса Steam).
+- Даёт возможность задать задержку между выставлением лотов.
+- Работает пошагово, что позволяет остановить процесс в любой момент.
 
-- Paste the contents of [this file](./steam-bulk-sell.js) after the caret in the console and press enter.
-- Wait while it sells all the cards. It should only take 60 seconds or so.
+**ОТКАЗ ОТ ОТВЕТСТВЕННОСТИ:** Я, как модификатор и русификатор, не несу ответственности за любые последствия, связанные с использованием этого скрипта. Вы используете его на свой страх и риск.
 
-**DISCLAIMER:** I take no responsibility to anything that happens to your Steam inventory or account while using this program.
+## Оригинальный автор
+Этот скрипт является русифицированной и модифицированной версией работы [Milkey Mouse](https://github.com/milkey-mouse). Оригинальный скрипт можно найти [здесь](https://milkey-mouse.github.io/SteamBulkSeller/).
+
+Если хотите использовать оригинальную версию (с медианой цен за 10 дней), ознакомьтесь с [инструкцией на странице оригинального проекта](https://milkey-mouse.github.io/SteamBulkSeller/).
+
+---
+**Примечание:** Этот скрипт работает только на странице инвентаря Steam.
